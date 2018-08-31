@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Project>
-   <description>https://forum.katalon.com/discussion/5292/console-mode-and-returning-exit-status</description>
-   <name>ConsoleModeAndReturningExitCodeToInformJenkinsOfFailure</name>
-   <tag></tag>
-   <UUID>3c155dd9-4a57-4468-bed3-261663e320f0</UUID>
-   <migratedVersion>5.4.0</migratedVersion>
-   <pageLoadTimeout>0</pageLoadTimeout>
-</Project>
