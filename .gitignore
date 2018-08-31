@@ -1,0 +1,14 @@
+*~
+*.swp
+
+.classpath
+.project
+
+/bin/keyword/*
+/bin/lib/Temp*.class
+!/bin/lib/internal/GlobalVariable.class
+/bin/listener/*
+/Libs/Temp*.groovy
+
+Materials/
+Reports/
