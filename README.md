@@ -33,7 +33,7 @@ When I ran this bat file in the Windows command prompt `TS0` was executed. As ex
 
 Then I put the project into GitHub and configured my Continuous Integration server (Jenkins) so that it continuously build the project. When I tried for the first time, in the Jenkins dashboard I found a blue ball icon for the project. ![blue_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/blue_ball.png) The blue ball icon means that Jenkins sees the project ran passed.
 
-Why PASSED? --- I expected to see a [red_ball] instead because `TC2` always fails.
+Why PASSED? --- I expected to see a  ![red_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/red_ball.png) instead because `TC2` always fails.
 
 I realized that Jenkins is not informed of the failure of the test case `TC2`. Possibly I need to rewrite the `run_console_mode.bat` script.
 
