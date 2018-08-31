@@ -22,7 +22,9 @@ I wanted to execute the test suite in console. I read the documentation of [Cons
 
 By executing this bat file in the Windows Command Prompt, I could run `TS0`. As expected `TC1` passed and `TC2` failed.
 
-Then I put this project into GitHub and configured my Continuous Integration (Jenkins) so that it continuously build this project by executing the bat file. When I tried for the first time, in the Jenkins dashboard I found a blue ball icon for the project. ![blue_ball]() The blue ball icon means that Jenkins sees the project ran passed. PASSED? --- No, this should not be. Because the test case `TC2` always fails.
+Then I put this project into GitHub and configured my Continuous Integration (Jenkins) so that it continuously build this project by executing the bat file. When I tried for the first time, in the Jenkins dashboard I found a blue ball icon for the project. ![blue_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/blue_ball.png)
+
+The blue ball icon means that Jenkins sees the project ran passed. PASSED? --- No, this should not be. Because the test case `TC2` always fails.
 
 I realized that Jenkins is not informed of the failure of the test case `TC2`. Possibly I need to rewrite the `run_console_mode.bat` script.
 
