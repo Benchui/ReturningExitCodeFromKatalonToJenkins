@@ -37,7 +37,7 @@ Why PASSED? --- I expected to see a red ball  ![red_ball](https://github.com/kaz
 
 Obviously Jenkins was not informed of the `TC2` failure. I realized that I need to rewrite the `run_console_mode.bat` script.
 
-## Revised bat file
+## Solution
 
 Here is my revised `run_console_mode.bat`:
 - [run_console_mode.bat](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/run_console_mode.bat)
