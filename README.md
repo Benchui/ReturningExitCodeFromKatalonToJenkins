@@ -15,16 +15,25 @@ I made a simple Katalon Studio project, which has a test suite named `TS0`. It i
 
 I wanted to execute the test suite in console. I read the documentation of [Console Mode Execution](https://docs.katalon.com/display/KD/Console+Mode+Execution). I made a Windows batch file named `run_console_mode.bat`. Its initial version was like this:
 ```
-(TODO)
+@echo off
+
+echo KATALONSTUDIO_HOME="%KATALONSTUDIO_HOME%"
+
+set DIR=%~dp0
+set SCRIPT_DIR=%DIR:~0,-1%
+echo SCRIPT_DIR=%SCRIPT_DIR%
+
+cd "%KATALONSTUDIO_HOME%"
+.\katalon.exe -noSplash -runMode=console -summaryReport -projectPath="%SCRIPT_DIR%" -testSuitePath="Test Suites\TS0" -browserType="Firefox" -headless --config -proxyOption=MANUAL_CONFIG -proxy.server.type=HTTP -proxy.server.address="172.24.2.10" -proxy.server.port="8080"
+cd /d "%SCRIPT_DIR%"
 ```
-(Please note that I have NOT written any code to deal with exit code from `.\katalon.exe` here)
+(Please note that here is no code to deal with the exitCode from `.\katalon.exe`)
 
+When I ran this bat file in the Windows command prompt `TS0` was executed. As expected `TC1` passed and `TC2` failed.
 
-By executing this bat file in the Windows Command Prompt, I could run `TS0`. As expected `TC1` passed and `TC2` failed.
+Then I put the project into GitHub and configured my Continuous Integration server (Jenkins) so that it continuously build the project. When I tried for the first time, in the Jenkins dashboard I found a blue ball icon for the project. ![blue_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/blue_ball.png) The blue ball icon means that Jenkins sees the project ran passed.
 
-Then I put this project into GitHub and configured my Continuous Integration (Jenkins) so that it continuously build this project by executing the bat file. When I tried for the first time, in the Jenkins dashboard I found a blue ball icon for the project. ![blue_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/blue_ball.png)
-
-The blue ball icon means that Jenkins sees the project ran passed. PASSED? --- No, this should not be. Because the test case `TC2` always fails.
+Why PASSED? --- I expected to see a [red_ball] instead because `TC2` always fails.
 
 I realized that Jenkins is not informed of the failure of the test case `TC2`. Possibly I need to rewrite the `run_console_mode.bat` script.
 
