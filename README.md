@@ -33,8 +33,30 @@ When I ran this bat file in the Windows command prompt `TS0` was executed. As ex
 
 Then I put the project into GitHub and configured my Continuous Integration server (Jenkins) so that it continuously build the project. When I tried for the first time, in the Jenkins dashboard I found a blue ball icon for the project. ![blue_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/blue_ball.png) The blue ball icon means that Jenkins sees the project ran passed.
 
-Why PASSED? --- I expected to see a  ![red_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/red_ball.png) instead because `TC2` always fails.
+Why PASSED? --- I expected to see a red ball  ![red_ball](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/docs/red_ball.png) instead, because `TC2` always fails.
 
-I realized that Jenkins is not informed of the failure of the test case `TC2`. Possibly I need to rewrite the `run_console_mode.bat` script.
+Obviously Jenkins was not informed of the `TC2` failure. I realized that I need to rewrite the `run_console_mode.bat` script.
+
+## Revised bat file
+
+Here is my revised `run_console_mode.bat`:
+- [run_console_mode.bat](https://github.com/kazurayam/ReturningExitCodeFromKatalonToJenkins/blob/master/run_console_mode.bat)
+
+The point is that it receives the exitCode from `.\katalon.exe` and pass it to the caller process.
+```
+...
+.\katalon.exe -noSplash -runMode=console ...
+set exitCode=%ERRORLEVEL%
+...
+exit /B %exitCode%
+```
+
+The line: `exit /B %exitCode%` solved my problem. Jenkins is now informed of the `TC2` failure and can deal with the job correctly.
 
 ## How to run the demonstration
+
+1. clone this project out to your local PC
+2. in Windows Command Promt window, cd to the project dir
+3. then type `.\run_console_mode.bat`
+4. a few minutes silent processing goes ...
+5. when finished, you will see a message `exitCode=1`

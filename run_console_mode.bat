@@ -10,6 +10,5 @@ cd "%KATALONSTUDIO_HOME%"
 set exitCode=%ERRORLEVEL%
 cd /d "%SCRIPT_DIR%"
 
-echo %exitCode%
-rem exit /B %exitCode%
-exit /B 1
+echo exitCode=%exitCode%
+exit /B %exitCode%
